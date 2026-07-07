@@ -1,0 +1,3 @@
+nome  gastos 
+............
+andre  200.0
