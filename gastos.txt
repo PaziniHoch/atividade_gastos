@@ -1,3 +1,6 @@
 nome  gastos 
 ............
 andre  200.0
+
+joao   150
+marcos  230
