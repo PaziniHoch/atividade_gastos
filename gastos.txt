@@ -4,3 +4,11 @@ andre  200.0
 
 joao   150
 marcos  230
+
+
+
+andre 100
+andre 200
+andre 150
+
+andre 200
