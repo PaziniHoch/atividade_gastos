@@ -1,0 +1,55 @@
+/*CRIAR TABELA USUARIOS*/
+CREATE TABLE usuarios(
+	id SERIAL PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL,
+	email VARCHAR(100) UNIQUE NOT NULL,
+	data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+/*CRIAR TABELA GASTOS*/
+CREATE TABLE gastos(
+	id SERIAL PRIMARY KEY,
+	usuario_id INTEGER NOT NULL REFERENCES usuarios(id),
+	valor NUMERIC(10,2) NOT NULL,
+	descricao TEXT NOT NULL,
+	data DATE NOT NULL
+);
+
+
+/*INSERIR OS USUARIOS*/
+INSERT INTO usuarios (nome,email) VALUES
+	('Andre','pazinihoch@gmail.com'),
+	('Caua','caua@hotmail.com');
+
+
+/*PESQUISAR NUMERO DOS USUARIOS*/
+SELECT * FROM usuarios;
+
+
+/*INSERIR GASTOS MANUALMENTE CONFORME NUMERO DO INTEGRANTE*/
+INSERT INTO gastos (usuario_id,valor,descricao,data)VALUES
+	(1,100.00,'Gasolina','2026-07-02'),
+	(1,52.60,'Ifood','2026-07-08'),
+	(1,12.50,'Uber','2026-07-09'),
+	(2,19.00,'Padaria','2026-07-19'),
+	(2,509.50,'Mercado','2026-07-05');
+
+
+/*PESQUISAR GASTOS DO USUARIO ESPECIFICO*/
+SELECT usuarios.nome, gastos.valor , gastos.data 
+FROM gastos
+JOIN usuarios ON gastos.usuario_id=usuarios.id
+WHERE usuarios.nome = 'Andre';
+
+
+/*GASTOS DO USUARIO 2 EM MAIO*/
+SELECT
+    usuarios.nome,
+    gastos.valor,
+    gastos.descricao,
+    gastos.data
+FROM gastos
+JOIN usuarios ON gastos.usuario_id = usuarios.id
+WHERE usuarios.nome = 'Caua'
+  AND TO_CHAR(gastos.data, 'YYYY-MM') = '2026-05';
