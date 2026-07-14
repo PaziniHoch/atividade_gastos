@@ -106,3 +106,24 @@ WHERE usuarios.nome = 'Caua'
   AND TO_CHAR(gastos.data, 'YYYY-MM') = '2026-07'
   AND gastos.valor <15; 
 
+
+
+/*Campeão de gastos.Mês com maior Gasto de cada Um*/
+SELECT DISTINCT ON (usuarios.nome)
+    usuarios.nome,
+    TO_CHAR(gastos.data, 'YYYY-MM') AS mes,
+    SUM(gastos.valor) AS total_gasto
+FROM gastos
+JOIN usuarios ON gastos.usuario_id = usuarios.id
+GROUP BY usuarios.nome, mes
+ORDER BY usuarios.nome, total_gasto DESC;
+
+/*Campeão de gastos.Mês com MENOR Gasto de cada Um*/
+SELECT DISTINCT ON (usuarios.nome)
+    usuarios.nome,
+    TO_CHAR(gastos.data, 'YYYY-MM') AS mes,
+    SUM(gastos.valor) AS total_gasto
+FROM gastos
+JOIN usuarios ON gastos.usuario_id = usuarios.id
+GROUP BY usuarios.nome, mes
+ORDER BY usuarios.nome, total_gasto;
